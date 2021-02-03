@@ -58,21 +58,25 @@ char *trim(char *s)
 
 void reader_func(struct reader_func_args *reader_args)
 {   
-    char buff[MAX_MSGSIZE];
+    char* buff = malloc(sizeof(char) * 1024);
 
     FILE * fp;
 
     // char filename[] = "file1";
-    read(reader_args -> sockfd, buff, 30);
+    read(reader_args -> sockfd, buff, 1024);
 
 
-    char *filepath = malloc(sizeof(char) * 36);
+    char *filepath = malloc(sizeof(char) * 1024);
     sprintf(filepath, "files/%s", buff);
 
     trim(filepath);
-    printf("%s", filepath);
 
-    fp = fopen(filepath, "w");
+    if (printf("%s\n", filepath) <= 0)
+    {
+        perror("filepath");
+    }
+
+    fp = fopen(filepath, "w+");
 
     // fp = fopen("files/test", "w+");
     if (fp == NULL)
@@ -84,17 +88,24 @@ void reader_func(struct reader_func_args *reader_args)
     while (1)
     {
         // read the message from client and write it on file
-        bzero(buff, sizeof(buff));
-        int size_read = read(reader_args -> sockfd, buff, sizeof(buff));
+        bzero(buff, MAX_MSGSIZE);
+        int size_read = read(reader_args -> sockfd, buff, MAX_MSGSIZE);
+        // if (printf("line received") <= 0)
+        // {
+        //     perror("received");
+        // }   
+
+        // printf("%s", buff);
         if (size_read <= 0)
         {
-            // perror("read");
+            perror("read");
+            printf("file received");
             fclose(fp);    
             return;
         }
 
         fprintf(fp, "%s", buff);
-    }    
+    }   
 
 
     return;
