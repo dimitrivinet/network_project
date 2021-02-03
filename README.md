@@ -1,3 +1,3 @@
 # network_project
 
-### Choix: Tetris
+### Choix: FTP
