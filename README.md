@@ -1,13 +1,13 @@
 # network_project
 
-### Choix: FTP
+### Choice: FTP
 
-Pour utiliser le serveur:
- - modifier le define ADDR et PORT vers sa propre adresse ip et le port voulu,
- - lancer make,
- - lancer le serveur,
- - lancer le client,
- - entrer le nom d'un fichier se trouvant dans le même dossier que le client,
- - le fichier reçu par le serveur sera dans un dossier "files" dans le même dossier que le serveur.
+To use the server:
+ - modify ADDR and PORT in the define section of server.c and client.c to the desired ip adress and port,
+ - launch make in a terminal,
+ - launch the server file in a terminal
+ - launch the client file in another terminal,
+ - type the name of a file to be sent (must be in the same directory as the client file),
+ - the file received by the server will be in the "files" directory.
 
-Attention, ne fonctionne qu'avec du texte pour le moment.
+Caution, in only works with text files for now.
