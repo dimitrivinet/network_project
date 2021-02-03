@@ -50,7 +50,7 @@ void func(int sockfd)
     printf("\nfilepath: %s\n", filepath);
 
     // write(sockfd, buff, sizeof(buff)); //write to socket
-    write(sockfd, filepath, sizeof(buff));
+    write(sockfd, filepath, 1024);
 
     if ((strncmp(buff, "exit", 4)) == 0) { 
         printf("Client Exit...\n"); 
@@ -72,7 +72,9 @@ void func(int sockfd)
         printf("Retrieved line of length %zu:\n", read);
         printf("%s\n", line);
 
-        if (write(sockfd, line, MAX) < 0)
+        sleep(0.1);
+
+        if (write(sockfd, line, sizeof(line)) < 0)
         {
             perror("write to server sock\n");
             // continue;

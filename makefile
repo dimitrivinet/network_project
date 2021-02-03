@@ -1,7 +1,7 @@
-TARGET=server
+
 
 all:
-	gcc ${TARGET}.c -o ${TARGET} -lpthread
+	gcc server.c -o server -lpthread
 	gcc client.c -o client
 
 flush:
@@ -10,4 +10,5 @@ flush:
 
 clean:
 	- rm server
+	- rm client
 

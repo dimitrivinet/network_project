@@ -14,7 +14,7 @@
 #define PORT 6666
 #define ADDR "172.21.72.124"
 #define LISTEN_BACKLOG 50
-#define MAX_MSGSIZE 1024
+#define MAX_MSGSIZE 102400
 #define MAX_CLIENTS 380
 
 
@@ -58,24 +58,26 @@ char *trim(char *s)
 
 void reader_func(struct reader_func_args *reader_args)
 {   
-    char* buff = malloc(sizeof(char) * 1024);
+    char* buff = malloc(sizeof(char) * MAX_MSGSIZE);
 
-    FILE * fp;
 
     // char filename[] = "file1";
-    read(reader_args -> sockfd, buff, 1024);
+    read(reader_args -> sockfd, buff, MAX_MSGSIZE);
+
+    // printf("buff: %s", buff);
 
 
-    char *filepath = malloc(sizeof(char) * 1024);
+    char *filepath = malloc(sizeof(char) * MAX_MSGSIZE);
     sprintf(filepath, "files/%s", buff);
 
-    trim(filepath);
+    // trim(filepath);
 
     if (printf("%s\n", filepath) <= 0)
     {
         perror("filepath");
     }
 
+    FILE * fp;
     fp = fopen(filepath, "w+");
 
     // fp = fopen("files/test", "w+");
